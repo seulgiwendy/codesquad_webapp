@@ -9,6 +9,7 @@ public class GetReq {
 	
 	@RequestMapping(value = "/bye", method = RequestMethod.GET)
 	public String bye() {
+		
 		return "꺼져!" ;
 	}
 
