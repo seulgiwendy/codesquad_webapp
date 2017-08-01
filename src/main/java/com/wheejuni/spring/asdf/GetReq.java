@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GetReq {
 	
+	
 	@RequestMapping(value = "/bye", method = RequestMethod.GET)
 	public String bye() {
 		
