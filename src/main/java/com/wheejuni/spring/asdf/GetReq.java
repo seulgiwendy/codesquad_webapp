@@ -12,5 +12,11 @@ public class GetReq {
 		
 		return "꺼져!" ;
 	}
+	@RequestMapping(value = "/redvelvet", method = RequestMethod.GET)
+	public String rv() {
+		
+		return "내가 제일 좋아하는 건 여름 그 맛~ 예!" ;
+	}
+	
 
 }
