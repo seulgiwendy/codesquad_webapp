@@ -12,13 +12,14 @@ import com.wheejuni.spring.domain.Question;
 
 @Controller
 public class QuestionsController {
-	ArrayList<Question>questions = new ArrayList<>();
+	static ArrayList<Question>questions = new ArrayList<>();
 	
 	@PostMapping("/qna")
 	public ModelAndView create(Question question) {
 		
+		question.setTime();
 		questions.add(question);
-		return new ModelAndView("redirect:/index.html");
+		return new ModelAndView("redirect:/");
 	}
 	
 	@GetMapping("/qna")
