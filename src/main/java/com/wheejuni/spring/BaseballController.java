@@ -20,7 +20,7 @@ public class BaseballController {
 	public ModelAndView returnNumber(@RequestParam("inputvalue") String inputnumber, @RequestParam("subvalue") String nextnumber, @RequestParam("lastvalue") String lastnumber) {
 		
 		
-		
+		System.out.println(computerball.toString());
 		System.out.println("input data = " + inputnumber + ", next data = " + nextnumber + ", last data =" + lastnumber);
 		
 		ArrayList <Integer> userInputList = new ArrayList<Integer>();
