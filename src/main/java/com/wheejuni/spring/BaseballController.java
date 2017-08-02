@@ -12,6 +12,9 @@ import java.util.ArrayList;
 public class BaseballController {
 	
 	public static ArrayList computerball = BallShuffler.returnRandint();
+	public static String lastwinner = null;
+	public static int lastwinnerscore = 0;
+	public int attempt = 1;
 	@RequestMapping(value = "/baseball", method = RequestMethod.GET)
 	
 	public ModelAndView returnNumber(@RequestParam("inputvalue") String inputnumber, @RequestParam("subvalue") String nextnumber, @RequestParam("lastvalue") String lastnumber) {
@@ -40,12 +43,19 @@ public class BaseballController {
 				String answer = "이번 한 번만 답을 알랴줌. 답은: " + computerball.toString();
 				wrong.addObject("response", resultString);
 				wrong.addObject("answer", answer);
+				wrong.addObject("try", attempt);
+				attempt++;
 			}
 			else {
 				resultString = "정답을 맞췄습니다! 대단합니다!";
+				
 				progswitch = false;
 				mav.addObject("response", resultString);
+				mav.addObject("winnername", lastwinner);
+				mav.addObject("winnerscore", lastwinnerscore);
+				lastwinnerscore = attempt;
 				computerball = BallShuffler.returnRandint();
+				attempt = 1;
 				return mav;
 				
 			}
@@ -56,6 +66,14 @@ public class BaseballController {
 		//mav.addObject("value", topnumber);
 		
 		
+	}
+	
+	@RequestMapping(value = "/winner", method = RequestMethod.GET)
+	public ModelAndView winnerAdd(@RequestParam("name") String name) {
+		ModelAndView resultpage = new ModelAndView("/baseball/success");
+		BaseballController.lastwinner = name;
+		resultpage.addObject("yourname", name);
+		return resultpage;
 	}
 
 }
