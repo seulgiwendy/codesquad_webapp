@@ -75,5 +75,9 @@ public class BaseballController {
 		resultpage.addObject("yourname", name);
 		return resultpage;
 	}
+	@RequestMapping(value = "/ballgame", method = RequestMethod.GET)
+	public String returnForm() {
+		return "/baseball/form.html";
+	}
 
 }
