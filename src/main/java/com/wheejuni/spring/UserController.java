@@ -12,15 +12,15 @@ import com.wheejuni.spring.domain.User;
 @Controller
 public class UserController {
 
-	ArrayList<User> userlist = new ArrayList<>();
+	ArrayList<User> users = new ArrayList<>();
 
 	@PostMapping("/users")
 	public ModelAndView create(User user) {
 		
-		userlist.add(user);
+		users.add(user);
 		ModelAndView userview = new ModelAndView("users/list");
-		userview.addObject("users", userlist);
-		System.out.println(userlist.size());
+		userview.addObject("users", users);
+		System.out.println(users.size());
 		return userview;
 	}
 
