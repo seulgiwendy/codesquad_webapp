@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,6 +30,16 @@ public class UserController {
 		ModelAndView userview = new ModelAndView("users/list");
 		userview.addObject("users", users);
 		return userview;
+	}
+	
+	@GetMapping("/users/{index}")
+	public ModelAndView show(@PathVariable int index) {
+		User user = users.get(index);
+		
+		ModelAndView userpf = new ModelAndView("users/profile");
+		userpf.addObject("userinfo", user);
+		return userpf;
+		
 	}
 
 }
