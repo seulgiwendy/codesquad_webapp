@@ -26,11 +26,7 @@ public class UserController {
 
 		userlist.add(user);
 		ModelAndView userview = new ModelAndView("users/list");
-		userview.addObject("id", userId);
-		userview.addObject("key", password);
-		userview.addObject("name", name);
-		userview.addObject("email", email);
-		
+		userview.addObject("users", userlist);
 		System.out.println(userlist.size());
 		return userview;
 	}
