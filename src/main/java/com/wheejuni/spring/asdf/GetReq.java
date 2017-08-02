@@ -19,7 +19,7 @@ public class GetReq {
 		return "내가 제일 좋아하는 건 여름 그 맛~ 예!" ;
 	}
 	
-	//github test forever..until i get a proper notification msg.
+	
 	
 
 }
