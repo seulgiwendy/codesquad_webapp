@@ -15,6 +15,7 @@ import com.wheejuni.spring.domain.Question;
 public class QuestionsController {
 	static ArrayList<Question>questions = new ArrayList<>();
 	ArrayList <Answer> answers = new ArrayList<>();
+	AnswersStore as = new AnswersStore();
 	@PostMapping("/qna")
 	public ModelAndView create(Question question) {
 		
@@ -54,10 +55,12 @@ public class QuestionsController {
 		Question temp = questions.get(index);
 		System.out.println(answer.getContent());
 		temp.setAnswers(answers);
+		
 		questions.remove(index);
 		questions.add(index, temp);
-		System.out.println(questions.get(index).getAnswers().get(0).getContent());
-		return new ModelAndView("redirect:/qna");
+		//System.out.println(questions.get(index).getAnswers().get(0).getContent());
+		
+		return new ModelAndView("redirect:/qna/{index}");
 	}
 
 }
