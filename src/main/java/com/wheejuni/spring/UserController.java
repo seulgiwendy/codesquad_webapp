@@ -41,5 +41,15 @@ public class UserController {
 		return userpf;
 		
 	}
+	
+	@GetMapping("/users/login")
+	public String returnLoginForm() {
+		return "/users/login";
+	}
+	
+	@GetMapping("/users/join")
+	public String returnJoinForm() {
+		return "/users/form";
+	}
 
 }
