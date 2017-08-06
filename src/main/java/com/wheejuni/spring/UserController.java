@@ -15,11 +15,6 @@ import com.wheejuni.spring.domain.*;
 import com.wheejuni.spring.domain.User;
 import com.wheejuni.spring.domain.UserRepository;
 
-
-
-
-
-@SuppressWarnings("deprecation")
 @Controller
 public class UserController {
 	@Autowired
@@ -28,35 +23,35 @@ public class UserController {
 
 	@PostMapping("/users")
 	public ModelAndView create(User user) {
-		
+
 		users.add(user);
 		userRepo.save(user);
 		System.out.println(users.size());
 		return new ModelAndView("redirect:/users");
 	}
-	
+
 	@GetMapping("/users")
 	public ModelAndView list() {
 		ModelAndView userview = new ModelAndView("users/list");
-		userview.addObject("users", users);
+		userview.addObject("users", userRepo.findAll());
 		return userview;
 	}
-	
+
 	@GetMapping("/users/{index}")
 	public ModelAndView show(@PathVariable int index) {
-		User user = users.get(index);
-		
+		User user = userRepo.findOne((long) index + 1);
+
 		ModelAndView userpf = new ModelAndView("users/profile");
 		userpf.addObject("userinfo", user);
 		return userpf;
-		
+
 	}
-	
+
 	@GetMapping("/users/login")
 	public String returnLoginForm() {
 		return "/users/login";
 	}
-	
+
 	@PostMapping("/users/login")
 	public ModelAndView getLoginInfo(String id, String password, HttpSession session) {
 		User user = userRepo.id(id);
@@ -69,13 +64,15 @@ public class UserController {
 		}
 		session.setAttribute("user", user);
 		loginMav.addObject("username", user.getUsername());
+		System.out.print(user.toString());
 		return loginMav;
 	}
+
 	@GetMapping("/users/join")
 	public String returnJoinForm() {
 		return "/users/form";
 	}
-	
+
 	@GetMapping("/users/loginFailed")
 	public ModelAndView returnLoginFailed() {
 		return new ModelAndView("/users/loginfail");

@@ -1,15 +1,33 @@
 package com.wheejuni.spring.domain;
 
 import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-
+@Entity
 public class Question {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	long questionid;
 	String content, author, title, time;
 	ArrayList<Answer> answers;
+	
+
+	public long getQuestionid() {
+		return questionid;
+	}
+
+	public void setQuestionid(long questionid) {
+		this.questionid = questionid;
+	}
 
 	public String getTime() {
 		return time;
