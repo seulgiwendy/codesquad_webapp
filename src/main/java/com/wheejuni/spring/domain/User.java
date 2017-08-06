@@ -1,7 +1,16 @@
 package com.wheejuni.spring.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class User {
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	long uniqueId;
 	String id, username, password, email;
 
 	public String getId() {
@@ -35,8 +44,5 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
-	
-	
+
 }
