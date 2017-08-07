@@ -1,6 +1,5 @@
 package com.wheejuni.spring.domain;
 
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
