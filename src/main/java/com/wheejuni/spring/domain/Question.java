@@ -1,25 +1,55 @@
 package com.wheejuni.spring.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 @Entity
 public class Question {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	long questionid;
 	String content, author, title, time;
-	ArrayList<Answer> answers;
-	
+	//ArrayList<Answer> answers;
+	@ManyToOne
+	@JoinColumn(foreignKey = @ForeignKey(name = "fk_questions_writer"))
+	private User writer;
+
+	@OneToMany
+	@JoinColumn(name = "answer_id")
+	private List<Answer> answersdb;
+
+	public void setAnswerDb(Answer answer) {
+		if (answersdb == null) {
+			answersdb = new ArrayList<>();
+		}
+
+		answersdb.add(answer);
+	}
+
+	public List<Answer> getAnswerDb() {
+		return this.answersdb;
+	}
+
+	public User getWriter() {
+		return writer;
+	}
+
+	public void setWriter(User writer) {
+		this.writer = writer;
+	}
 
 	public long getQuestionid() {
 		return questionid;
@@ -64,13 +94,7 @@ public class Question {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	
-	public void setAnswers(ArrayList<Answer> answers) {
-		this.answers = answers;
-	}
-	
-	public ArrayList<Answer> getAnswers(){
-		return this.answers;
-	}
 
 }

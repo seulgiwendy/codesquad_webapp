@@ -1,5 +1,6 @@
 package com.wheejuni.spring.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +12,26 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	long uniqueId;
-	String id, username, password, email;
+
+	@Column(nullable = false, unique = true, length = 25)
+	String id;
+
+	@Column(nullable = false, unique = true, length = 25)
+
+	String username;
+	String password;
+	@Column(nullable = true)
+	String email;
+	
+	
+	
+	public long getUniqueId() {
+		return uniqueId;
+	}
+
+	public void setUniqueId(long uniqueId) {
+		this.uniqueId = uniqueId;
+	}
 
 	public String getId() {
 		return id;
@@ -44,7 +64,7 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	@Override
 	public String toString() {
 		String userInfo = "user info: " + this.id + "\n name: " + this.username;

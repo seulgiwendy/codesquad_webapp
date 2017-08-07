@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 public interface AnswerRepository extends CrudRepository <Answer, Long>{
 	
 	Answer answerid(String id);
-
+	Answer question_questionid(String questionid);
 }

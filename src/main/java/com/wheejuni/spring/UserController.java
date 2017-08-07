@@ -24,9 +24,9 @@ public class UserController {
 	@PostMapping("/users")
 	public ModelAndView create(User user) {
 
-		users.add(user);
+		//users.add(user);
 		userRepo.save(user);
-		System.out.println(users.size());
+		//System.out.println(users.size());
 		return new ModelAndView("redirect:/users");
 	}
 
@@ -39,7 +39,7 @@ public class UserController {
 
 	@GetMapping("/users/{index}")
 	public ModelAndView show(@PathVariable int index) {
-		User user = userRepo.findOne((long) index + 1);
+		User user = userRepo.findOne((long) index);
 
 		ModelAndView userpf = new ModelAndView("users/profile");
 		userpf.addObject("userinfo", user);

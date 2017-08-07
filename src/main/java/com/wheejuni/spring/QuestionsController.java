@@ -29,7 +29,7 @@ public class QuestionsController {
 	public ModelAndView create(Question question) {
 		
 		question.setTime();
-		question.setAnswers(AnswerController.answers);
+		//question.setAnswers(AnswerController.answers);
 		questionRepo.save(question);
 		questions.add(question);
 		return new ModelAndView("redirect:/");
@@ -48,12 +48,14 @@ public class QuestionsController {
 	public ModelAndView show(@PathVariable int index) {
 		
 		//Question question = questions.get(index);
-		Question question = questionRepo.findOne((long)index + 1);
+		Question question = questionRepo.findOne((long)index);
 		ModelAndView showDetailQuestion = new ModelAndView("qna/show");
 		showDetailQuestion.addObject("qnainfo", question);
-		showDetailQuestion.addObject("answerinfo", question.getAnswers());
+		showDetailQuestion.addObject("answerinfo",question.getAnswerDb());
 		//System.out.println(question.getAnswers().get(0).getContent());
-		showDetailQuestion.addObject("answercount", question.getAnswers().size());
+		showDetailQuestion.addObject("answercount", question.getAnswerDb().size());
+		//showDetailQuestion.addObject("writer", question.getWriter());
+
 		
 		return showDetailQuestion;
 	}
@@ -62,17 +64,27 @@ public class QuestionsController {
 	public ModelAndView addAnswer(@PathVariable int index, Answer answer) {
 		
 		answer.setTime();
-		answers.add(answer);
+		answer.setQuestion(questionRepo.questionid((long) index));
 		answerRepo.save(answer);
-		Question temp = questions.get(index);
-		System.out.println(answer.getContent());
-		temp.setAnswers(answers);
 		
-		questions.remove(index);
-		questions.add(index, temp);
+		Question temp = questionRepo.questionid((long)index);
+		temp.setAnswerDb(answer);
+		questionRepo.save(temp);
+		
+		System.out.println(answer.getContent());
+		
+		
+		//questions.remove(index);
+		//questions.add(index, temp);
 		//System.out.println(questions.get(index).getAnswers().get(0).getContent());
 		
 		return new ModelAndView("redirect:/qna/{index}");
+	}
+	
+	@GetMapping ("/qna/add")
+	public ModelAndView addQuestion() {
+		
+		return new ModelAndView("qna/form");
 	}
 
 }
