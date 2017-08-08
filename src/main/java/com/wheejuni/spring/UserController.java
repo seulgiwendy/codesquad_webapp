@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,10 +68,34 @@ public class UserController {
 		System.out.print(user.toString());
 		return loginMav;
 	}
+	
+	@GetMapping("/users/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("user");
+		return("redirect:/");
+	}
 
 	@GetMapping("/users/join")
 	public String returnJoinForm() {
 		return "/users/form";
+	}
+	
+	@GetMapping("/users/edit")
+	public String returnEditForm(Model model, HttpSession session) {
+		User user = (User)session.getAttribute("user");
+		if (user == null) {
+			return "users/editFailMessage";
+		}
+		//model.addAttribute("user", user);
+		return "/users/edit";
+	}
+	
+	@PostMapping("/users/edit/{index}")
+	public String returnCompleteForm(@PathVariable long index, User newUser) {
+		User user = userRepo.findOne(index);
+		user.update(newUser);
+		userRepo.save(user);
+		return "redirect:/users";
 	}
 
 	@GetMapping("/users/loginFailed")

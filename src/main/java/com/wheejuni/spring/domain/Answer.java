@@ -22,11 +22,24 @@ public class Answer {
 	@ManyToOne
 	@JoinColumn (foreignKey = @ForeignKey(name = "fk_answer_to_question"))
 	private Question question;
-
+	
+	@ManyToOne
+	@JoinColumn (foreignKey = @ForeignKey(name = "fk_answer_to_user"))
+	private User writer;
+	
 	String author, content, time;
-
+	
+	public User getWriter() {
+		return writer;
+	}
+	
+	public void setWriter(User writer) {
+		this.writer = writer;
+	}
+	
+	
 	public String getAuthor() {
-		return author;
+		return writer.getUsername();
 	}
 
 	public void setAuthor(String author) {

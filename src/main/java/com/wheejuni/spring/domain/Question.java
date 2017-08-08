@@ -80,7 +80,7 @@ public class Question {
 	}
 
 	public String getAuthor() {
-		return author;
+		return writer.getUsername();
 	}
 
 	public void setAuthor(String author) {
@@ -95,6 +95,11 @@ public class Question {
 		this.title = title;
 	}
 
+	public void update(Question question) {
+		this.content = question.getContent();
+		this.time = question.getTime();
+		this.title = question.getTitle();
+	}
 	
 
 }
