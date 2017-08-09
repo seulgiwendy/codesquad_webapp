@@ -4,7 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, Long>{
 
-	User id (String id) ;
+	User findById (String id) ;
 	
-	User uniqueId(long uid);
+	User findByUniqueId(long uid);
 }

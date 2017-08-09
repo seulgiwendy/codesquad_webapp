@@ -33,7 +33,7 @@ public class QuestionsController {
 	@PostMapping("/qna")
 	public ModelAndView create(Question question, HttpSession session) {
 		
-		User loggedInUser = (User) session.getAttribute("user");
+		User loggedInUser = (User) session.getAttribute("loginuser");
 		question.setTime();
 		question.setWriter(loggedInUser);
 		//question.setAnswers(AnswerController.answers);
@@ -72,7 +72,10 @@ public class QuestionsController {
 	@GetMapping("/qna/{index}/modify")
 	public String modifyQuestion(@PathVariable long index, HttpSession session, Model model) {
 		Question question = questionRepo.findOne(index);
-		User loginUser = (User)session.getAttribute("user");
+		User loginUser = (User)session.getAttribute("loginuser");
+		if (loginUser == null) {
+			return "qna/modifyFailMessage";
+		}
 		User originalWriter = question.getWriter();
 		System.out.println("logged in user is : " + loginUser.getUsername());
 		System.out.println("article writer was : " + originalWriter.getUsername());
@@ -85,7 +88,7 @@ public class QuestionsController {
 	
 	@PostMapping("/qna/{index}")
 	public ModelAndView addAnswer(@PathVariable int index, Answer answer, HttpSession session) {
-		User answerWriteUser = (User)session.getAttribute("user");
+		User answerWriteUser = (User)session.getAttribute("loginuser");
 		answer.setTime();
 		answer.setQuestion(questionRepo.questionid((long) index));
 		answer.setWriter(answerWriteUser);
@@ -117,7 +120,7 @@ public class QuestionsController {
 	
 	@GetMapping ("/qna/add")
 	public ModelAndView addQuestion(HttpSession session) {
-		if (session.getAttribute("user") == null) {
+		if (session.getAttribute("loginuser") == null) {
 			return new ModelAndView("qna/gologin");
 		}
 		return new ModelAndView("qna/form");

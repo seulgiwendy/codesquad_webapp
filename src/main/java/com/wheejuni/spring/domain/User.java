@@ -85,11 +85,30 @@ public class User {
 		return userInfo;
 	}
 
-	public void update(User newUser) {
+	public boolean update(User newUser) {
+		if (this.getPassword().equals(newUser.getPassword()) == false) {
+			return false;
+		}
+		
 		this.email = newUser.email;
 		this.id = newUser.id;
 		this.password = newUser.password;
 		this.username = newUser.username;
+		return true;
+	}
+	
+	public boolean checkPwd(User newUser) {
+		if (this.getPassword() != newUser.getPassword()) {
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean isFalsePassword(String password) {
+		if (password.equals(this.getPassword())) {
+			return false;
+		}
+		return true;
 	}
 
 }

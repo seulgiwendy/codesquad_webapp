@@ -6,18 +6,18 @@
 <body>
 {{> include/nav}}
 
-{{#user}}
+{{#loginuser}}
 <div class="container" id="main">
    <div class="col-md-6 col-md-offset-3">
       <div class="panel panel-default content-main">
-          <form name="question" method="post" action="/users/edit/{{uniqueId}}">
+          <form name="question" method="post" action="/users/modify/{{uniqueId}}">
               <div class="form-group">
                   <label for="userId">사용자 아이디</label>
-                  <input class="form-control" id="id" name="id" placeholder="{{id}}">
+                  {{id}}
               </div>
               <div class="form-group">
                   <label for="password">비밀번호</label>
-                  <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                  <input type="password" class="form-control" id="password" name="password" placeholder="사용하던 암호 입력">
               </div>
               <div class="form-group">
                   <label for="name">이름</label>
@@ -33,7 +33,7 @@
         </div>
     </div>
 </div>
-{{/user}}
+{{/loginuser}}
 
 <!-- script references -->
 {{> include/footer}}
