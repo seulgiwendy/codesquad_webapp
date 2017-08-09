@@ -59,6 +59,7 @@ public class QuestionsController {
 		User writer = question.getWriter();
 		ModelAndView showDetailQuestion = new ModelAndView("qna/show");
 		showDetailQuestion.addObject("qnainfo", question);
+		showDetailQuestion.addObject("destIndex", index);
 		showDetailQuestion.addObject("qnawriter", writer.getUsername());
 		showDetailQuestion.addObject("answerinfo",question.getAnswerDb());
 		//System.out.println(question.getAnswers().get(0).getContent());
@@ -95,7 +96,7 @@ public class QuestionsController {
 		answerRepo.save(answer);
 		
 		Question temp = questionRepo.questionid((long)index);
-		temp.setAnswerDb(answer);
+		//temp.setAnswerDb(answer);
 		questionRepo.save(temp);
 		
 		System.out.println(answer.getContent());

@@ -54,7 +54,7 @@ public class UserController {
 	}
 
 	@PostMapping("/users/login")
-	public ModelAndView getLoginInfo(String id, String password, HttpSession session) {
+	public ModelAndView getLoginInfo(String id, String password, HttpSession session) throws IllegalAccessException {
 		User user = userRepo.findById(id);
 		ModelAndView loginMav = new ModelAndView("/users/loginSuccess");
 		if (user == null) {

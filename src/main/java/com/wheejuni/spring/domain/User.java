@@ -26,19 +26,15 @@ public class User {
 	String password;
 	@Column(nullable = true)
 	String email;
-	
-	@OneToMany
-	@JoinColumn(name = "answer_id") 
-	private List <Answer> writtenAnswers; 
-	
-	public List getWrittenAnswers() {
+
+	@OneToMany(mappedBy = "writer")
+	private List<Answer> writtenAnswers;
+
+	public List<Answer> getWrittenAnswers() {
 		return this.writtenAnswers;
 	}
-	
-	public void setWrittenAnswers(List answerlist) {
-		this.writtenAnswers = answerlist;
-	}
-	
+
+
 	public long getUniqueId() {
 		return uniqueId;
 	}
@@ -89,21 +85,21 @@ public class User {
 		if (this.getPassword().equals(newUser.getPassword()) == false) {
 			return false;
 		}
-		
+
 		this.email = newUser.email;
 		this.id = newUser.id;
 		this.password = newUser.password;
 		this.username = newUser.username;
 		return true;
 	}
-	
+
 	public boolean checkPwd(User newUser) {
 		if (this.getPassword() != newUser.getPassword()) {
 			return false;
 		}
 		return true;
 	}
-	
+
 	public boolean isFalsePassword(String password) {
 		if (password.equals(this.getPassword())) {
 			return false;

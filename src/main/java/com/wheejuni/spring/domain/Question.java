@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,26 +25,23 @@ public class Question {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	long questionid;
 	String content, author, title, time;
-	//ArrayList<Answer> answers;
+	// ArrayList<Answer> answers;
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_questions_writer"))
 	private User writer;
 
-	@OneToMany
-	@JoinColumn(name = "answer_id")
+	@OneToMany(mappedBy = "question")
+	@OrderBy("time asc")
+
 	private List<Answer> answersdb;
-
-	public void setAnswerDb(Answer answer) {
-		if (answersdb == null) {
-			answersdb = new ArrayList<>();
-		}
-
-		answersdb.add(answer);
-	}
 
 	public List<Answer> getAnswerDb() {
 		return this.answersdb;
 	}
+
+	/*
+	 * public List<Answer> getAnswersDb(){ return this.answersdb; }
+	 */
 
 	public User getWriter() {
 		return writer;
@@ -100,6 +100,5 @@ public class Question {
 		this.time = question.getTime();
 		this.title = question.getTitle();
 	}
-	
 
 }
