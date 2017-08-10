@@ -86,7 +86,7 @@ public class Answer {
 	public void setTime() {
 		String currentDate = null;
 		Date d = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd kk:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
 		currentDate = sdf.format(d);
 		this.time = currentDate;
 	}
