@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class Question {
 
 	@OneToMany(mappedBy = "question")
 	@OrderBy("time asc")
-
+	@JsonIgnore
 	private List<Answer> answersdb;
 
 	public List<Answer> getAnswerDb() {

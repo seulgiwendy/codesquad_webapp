@@ -23,11 +23,11 @@ public class Answer {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	long answerid;
 
-	@ManyToOne(cascade = { CascadeType.ALL })
+	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_answer_to_question"))
 	private Question question;
 
-	@ManyToOne(cascade = { CascadeType.ALL })
+	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_answer_to_user"))
 	private User writer;
 
@@ -47,9 +47,9 @@ public class Answer {
 
 	}
 
-	public User getWriter() {
+	/*public User getWriter() {
 		return writer;
-	}
+	}*/
 
 	public void setWriter(User writer) {
 		this.writer = writer;
