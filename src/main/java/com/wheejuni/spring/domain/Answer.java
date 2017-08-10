@@ -56,7 +56,7 @@ public class Answer {
 	}
 
 	public String getAuthor() {
-		return writer.getUsername();
+		return author;
 	}
 
 	public void setAuthor() {

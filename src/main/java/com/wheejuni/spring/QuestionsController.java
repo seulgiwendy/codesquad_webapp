@@ -91,9 +91,10 @@ public class QuestionsController {
 	public ModelAndView addAnswer(@PathVariable int index, Answer answer, HttpSession session) {
 		User answerWriteUser = (User)session.getAttribute("loginuser");
 		answer.setTime();
-		answer.setAuthor();
+		//answer.setAuthor();
 		answer.setQuestion(questionRepo.questionid((long) index));
 		answer.setWriter(answerWriteUser);
+		
 		answerRepo.save(answer);
 		
 		Question temp = questionRepo.questionid((long)index);

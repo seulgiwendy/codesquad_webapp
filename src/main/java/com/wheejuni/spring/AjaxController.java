@@ -40,8 +40,6 @@ public class AjaxController {
 		Question question = questionRepository.findOne(questionId);
 		Answer answer = new Answer(inputUser, question, content);
 
-		answerRepository.save(answer);
-		return answer;
-
+		return answerRepository.save(answer);
 	}
 }

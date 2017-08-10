@@ -42,15 +42,16 @@
 							</ul>
 						</div>
 					</article>
-					{{/qnainfo}} 
-					{{#answerinfo}}
+					{{/qnainfo}}
 					<div class="qna-comment">
 						<div class="qna-comment-slipp">
 							<p class="qna-comment-count">
-								<strong>{{answercount}}</strong>개의 의견
+								<strong>{{answercount}}개의 의견</strong>
 							</p>
-							<div class="qna-comment-slipp-articles">
+							<hr/>
 
+							<div class="qna-comment-slipp-articles">
+								{{#answerinfo}}
 								<article class="article" id="answer-1405">
 									<div class="article-header">
 										<div class="article-header-thumb">
@@ -80,48 +81,17 @@
 										</ul>
 									</div>
 								</article>
-								{{/answerinfo}} 
-								
-								{{#loginuser}}
-								<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-								
-								<form class="submit-write" action="/api/questions/{{destIndex}}/answers"
-									method="POST">
+								{{/answerinfo}} {{#loginuser}}
+
+
+								<form class="answer-write"
+									action="/api/questions/{{destIndex}}/answers" method="POST">
 									<div class="form-group" style="padding: 14px;">
 										<textarea name="content" id="content" class="form-control"
 											placeholder="Update your status"></textarea>
 									</div>
-									<button class="btn btn-success pull-right" type="submit">답변하기</button>
-									<script>
-									$(".submit-write").submit(addAnswer);
-									function addAnswer(answer){
-										answer.preventDefault();
-										var querystring = $('.submit-write').serialize();
-										var url = $(".submit-write").attr("action");
-										console.log(querystring);
-										 $.ajax({
-										        type : 'post',
-										        url : url,
-										        data : querystring,
-										        dataType : 'json',
-										        error : function(){
-										        	console.log('if you see this message, there was an error.')
-										        },
-										        success : function(data, status){
-										        	
-										        console.log(data);
-										        	
-										        	var answerTemplate = $("div.qna-comment-slipp").html();
-										            var template = answerTemplate.format(data.author, data.time, data.content);
-										            $(".qna-comment-slipp-articles").prepend(template);            
-										            $("textarea[name=contents]").val("");
-										        }
-										    });
-										
-									}
-									</script>
-									
-									{{/loginuser}}
+									<input type="submit" class="btn btn-success pull-right"
+										value="답변하기" /> {{/loginuser}}
 
 								</form>
 							</div>
@@ -133,7 +103,6 @@
 	</div>
 
 	<script type="text/template" id="answerTemplate">
-	<article class="article">
 		<div class="article-header">
 			<div class="article-header-thumb">
 				<img src="https://graph.facebook.com/v2.3/1324855987/picture" class="article-author-thumb" alt="">
@@ -152,7 +121,7 @@
 				<a class="link-modify-article" href="/api/qna/updateAnswer/{3}">수정</a>
 			</li>
 			<li>
-				<form class="delete-answer-form" action="/api/questions/{3}/answers/{4}" method="POST">
+				<form class="delete-answer-form" action="/api/questions/{4}/answers/{5}" method="POST">
 					<input type="hidden" name="_method" value="DELETE">
                      <button type="submit" class="delete-answer-button">삭제</button>
 				</form>

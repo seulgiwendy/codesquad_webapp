@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 
@@ -23,17 +25,12 @@ public class User {
 	@Column(nullable = false, unique = true, length = 25)
 
 	String username;
+
+	@JsonIgnore
 	String password;
+
 	@Column(nullable = true)
 	String email;
-
-	@OneToMany(mappedBy = "writer")
-	private List<Answer> writtenAnswers;
-
-	public List<Answer> getWrittenAnswers() {
-		return this.writtenAnswers;
-	}
-
 
 	public long getUniqueId() {
 		return uniqueId;

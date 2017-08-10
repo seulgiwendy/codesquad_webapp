@@ -32,10 +32,11 @@ public class Question {
 	private User writer;
 
 	@OneToMany(mappedBy = "question")
-	@OrderBy("time asc")
+	@OrderBy("time desc")
 	@JsonIgnore
 	private List<Answer> answersdb;
-
+	
+	@JsonIgnore
 	public List<Answer> getAnswerDb() {
 		return this.answersdb;
 	}
