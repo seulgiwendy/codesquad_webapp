@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
@@ -32,6 +33,8 @@ public class Answer {
 	private User writer;
 
 	String author, content, time;
+	
+	//String profilepic = writer.getProfilepath();
 
 	public Answer() {
 
@@ -47,9 +50,9 @@ public class Answer {
 
 	}
 
-	/*public User getWriter() {
+	public User getWriter() {
 		return writer;
-	}*/
+	}
 
 	public void setWriter(User writer) {
 		this.writer = writer;
@@ -90,5 +93,7 @@ public class Answer {
 		currentDate = sdf.format(d);
 		this.time = currentDate;
 	}
+	
+	
 
 }

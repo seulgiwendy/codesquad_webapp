@@ -56,12 +56,18 @@ public class QuestionsController {
 		
 		//Question question = questions.get(index);
 		Question question = questionRepo.findOne((long)index);
-		User writer = question.getWriter();
+		
+		ArrayList<User> answerUserList = new ArrayList<>();
+		for (int i = 0; i < answerUserList.size(); i++) {
+		answerUserList.add(question.getAnswerDb().get(i).getWriter());
+		}
+		
 		ModelAndView showDetailQuestion = new ModelAndView("qna/show");
 		showDetailQuestion.addObject("qnainfo", question);
 		showDetailQuestion.addObject("destIndex", index);
-		showDetailQuestion.addObject("qnawriter", writer.getUsername());
+		
 		showDetailQuestion.addObject("answerinfo",question.getAnswerDb());
+		
 		//System.out.println(question.getAnswers().get(0).getContent());
 		showDetailQuestion.addObject("answercount", question.getAnswerDb().size());
 		//showDetailQuestion.addObject("writer", question.getWriter());

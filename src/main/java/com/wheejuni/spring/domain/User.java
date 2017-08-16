@@ -31,6 +31,20 @@ public class User {
 
 	@Column(nullable = true)
 	String email;
+	
+	@Column(nullable = true)
+	String profilepath;
+	
+	public String getProfilepath() {
+		if (this.profilepath == null) {
+			return "default";
+		}
+		return this.profilepath;
+	}
+	
+	public void setProfilepath(String path) {
+		this.profilepath = path;
+	}
 
 	public long getUniqueId() {
 		return uniqueId;
